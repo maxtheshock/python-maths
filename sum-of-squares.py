@@ -3,7 +3,12 @@
 
 import math
 
-a = int(input("Enter a natural number: "))
+a = float(input("Enter a natural number: "))
+print()
+if a <= 0 or (a - a // 1) != 0:
+    while a <= 0 or (a - a // 1) != 0:
+        a = float(input("Your input must be natural! "))
+a = int(a)
 print()
 
 n1 = 1

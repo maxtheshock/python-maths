@@ -1,9 +1,41 @@
 import time
 
-a = int(input("Enter the lower bound: "))
-b = int(input("Enter the upper bound: "))
+show = None
+
+a = float(input("Enter the lower bound: "))
+print()
+if a <= 0 or (a - a // 1) != 0:
+    show = True
+    while a <= 0 or (a - a // 1) != 0:
+        a = float(input("Your input must be natural!\n"))
+a = int(a)
+if show:
+    print()
+    show = None
+
+b = float(input("Enter the upper bound: "))
+print()
+while b <= 0 or (b - b // 1) != 0 or a > b:
+    show = True
+    while b <= 0 or (b - b // 1) != 0:
+        b = float(input("Your input must be natural! "))
+    while a > b:
+        b = float(input("Upper bound cannot be smaller than the lower one! "))
+        break
+
+b = int(b)
+if show:
+    print()
+    del show
+
+numsDisplayed = input("Do we need to display numbers? (Y/N)\n")
+while numsDisplayed != "Y" and numsDisplayed != "y" and numsDisplayed != "N" and numsDisplayed != "n":
+    numsDisplayed = input("Do we need to display numbers? (Y/N)\n")
+if numsDisplayed == "Y" or numsDisplayed == "y":
+    print()
+
 timeDisplayed = None
-s = a
+x = a
 amount = 0
 s = 0
 
@@ -20,15 +52,16 @@ while a <= b:
     cyc2_time = time.time()
     d = a % s
     if d == 0:
-        print("[!] Number", a, "is harshad")
+        if numsDisplayed == "Y" or numsDisplayed == "y":
+            print("[!] Number", a, "is harshad")
         amount += 1
     if cyc2_time - cyc1_time > 1 and timeDisplayed != True:
         print()
-        print("(!) Progress: ", 100 * (a - s + 1) / (b - s + 1), "%", sep="")
+        print("(!) Progress: ", 100 * (a - x + 1) / (b - x + 1), "%", sep="")
         timeDisplayed = True
         cyc1_time = cyc2_time
     elif cyc2_time - cyc1_time > 1 and timeDisplayed == True:
-        print("(!) Progress: ", 100 * (a - s + 1) / (b - s + 1), "%", sep="")
+        print("(!) Progress: ", 100 * (a - x + 1) / (b - x + 1), "%", sep="")
         cyc1_time = cyc2_time
     s = 0
     digits.clear()
@@ -67,4 +100,4 @@ if int(el_time // 1) != 0:
     print("(!) Elapsed time:", elapsed_time)
 
 print()
-print("General amount:", amount)
+print("[!] General amount:", amount)

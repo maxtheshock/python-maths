@@ -1,14 +1,45 @@
-import math
+# import math
 import time
 
-a = int(input("Enter the lower bound: "))
-b = int(input("Enter the upper bound: "))
+show = None
 
+a = float(input("Enter the lower bound: "))
 print()
-s = a
+if a <= 0 or (a - a // 1) != 0:
+    show = True
+    while a <= 0 or (a - a // 1) != 0:
+        a = float(input("Your input must be natural!\n"))
+a = int(a)
+if show:
+    print()
+    show = None
+
+b = float(input("Enter the upper bound: "))
+print()
+while b <= 0 or (b - b // 1) != 0 or a > b:
+    show = True
+    while b <= 0 or (b - b // 1) != 0:
+        b = float(input("Your input must be natural! "))
+    while a > b:
+        b = float(input("Upper bound cannot be smaller than the lower one! "))
+        break
+
+b = int(b)
+if show:
+    print()
+    del show
+
+numsDisplayed = input("Do we need to display numbers? (Y/N)\n")
+while numsDisplayed != "Y" and numsDisplayed != "y" and numsDisplayed != "N" and numsDisplayed != "n":
+    numsDisplayed = input("Do we need to display numbers? (Y/N)\n")
+if numsDisplayed == "Y" or numsDisplayed == "y":
+    print()
+
+x = a
 n1 = 1
 counter = 0
 isRepresentable = None
+timeDisplayed = None
 
 start_time = time.time()
 cyc1_time = start_time
@@ -24,11 +55,17 @@ while a <= b:
     cyc2_time = time.time()
     n1 = 1
     if isRepresentable == True:
-        # print("[!] Number", a, "can be represented")
+        if numsDisplayed == "Y" or numsDisplayed == "y":
+            print("[!] Number", a, "can be represented")
         counter += 1
     isRepresentable = False
-    if cyc2_time - cyc1_time > 1:
-        print("(!) Progress: ", 100 * (a - s + 1) / (b - s + 1), "%", sep="")
+    if cyc2_time - cyc1_time > 1 and timeDisplayed != True:
+        print()
+        print("(!) Progress: ", 100 * (a - x + 1) / (b - x + 1), "%", sep="")
+        timeDisplayed = True
+        cyc1_time = cyc2_time
+    elif cyc2_time - cyc1_time > 1 and timeDisplayed == True:
+        print("(!) Progress: ", 100 * (a - x + 1) / (b - x + 1), "%", sep="")
         cyc1_time = cyc2_time
     a += 1
 
