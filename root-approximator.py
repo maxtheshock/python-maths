@@ -1,7 +1,9 @@
-import math
+from math import *
 
-a = float(input("[!] Введите начало отрезка: "))
-b = float(input("[!] Введите конец отрезка: "))
+expr = input("Enter a function:\n")
+
+a = float(input("[!] Enter first segment bound: "))
+b = float(input("[!] Enter second segment bound: "))
 
 x1 = a
 x2 = b
@@ -9,8 +11,8 @@ exact = None
 
 i = 0
 while i <= 60:
-    f1 = x1 ** 3 - 4 * (x1 ** 2) + x1 + 1
-    f2 = x2 ** 3 - 4 * (x2 ** 2) + x2 + 1
+    f1 = eval(expr.replace("x", "x1"))
+    f2 = eval(expr.replace("x", "x2"))
     if (f1 * f2) < 0:
         x3 = x2
         x2 = (x1 + x2) / 2
