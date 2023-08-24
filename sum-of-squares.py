@@ -3,13 +3,33 @@
 
 import math
 
-a = float(input("Enter a natural number: "))
+a = input("Enter a natural number: ")
+i = 0
+fails = 0
+deny = None
 print()
-if a <= 0 or (a - a // 1) != 0:
-    while a <= 0 or (a - a // 1) != 0:
-        a = float(input("Your input must be natural! "))
+
+for i in a:
+    if i == "." or i == "-":
+        deny = True
+        break
+    else:
+        deny = False
+
+while deny:
+    fails += 1
+    a = input("Enter a NATURAL number: ")
+    for i in a:
+        if i == "." or i == "-":
+            deny = True
+            break
+        else:
+            deny = False
+
+if fails > 0:
+    print()
+
 a = int(a)
-print()
 
 n1 = 1
 counter = 0
@@ -26,8 +46,8 @@ while n1 <= ((2 * a) ** 0.5) * 0.5:
     else:
         n1 += 1
 
-if isRepresentable != True:
+if not isRepresentable:
     print("[!] The number has no representation as a sum of 2 squares")
-elif isRepresentable == True and counter > 1:
+elif isRepresentable and counter > 1:
     print()
     print("(!) Combinations:", counter)

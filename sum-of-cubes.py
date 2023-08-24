@@ -1,15 +1,33 @@
 # This algorithm defines whether user's integer input is representable as a sum of 2 cubes
 # or not. If number is representable, it finds all the combinations
 
-import math
+a = input("Enter a natural number: ")
+i = 0
+fails = 0
+deny = None
+print()
 
-a = float(input("Enter a natural number: "))
-print()
-if a <= 0 or (a - a // 1) != 0:
-    while a <= 0 or (a - a // 1) != 0:
-        a = float(input("Your input must be natural! "))
+for i in a:
+    if i == "." or i == "-":
+        deny = True
+        break
+    else:
+        deny = False
+
+while deny:
+    fails += 1
+    a = input("Enter a NATURAL number: ")
+    for i in a:
+        if i == "." or i == "-":
+            deny = True
+            break
+        else:
+            deny = False
+
+if fails > 0:
+    print()
+
 a = int(a)
-print()
 
 n1 = 1
 counter = 0
@@ -26,8 +44,8 @@ while n1 <= round(((4 * a) ** (1/3)) * 0.5) and a - (n1 ** 3) > 0:
     else:
         n1 += 1
 
-if isRepresentable != True:
+if not isRepresentable:
     print("[!] The number has no representation as a sum of 2 cubes")
-elif isRepresentable == True and counter > 1:
+elif isRepresentable and counter > 1:
     print()
     print("(!) Combinations:", counter)

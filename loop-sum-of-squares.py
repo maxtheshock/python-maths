@@ -2,29 +2,85 @@ import math
 import time
 
 show = None
+fails = 0
+deny = None
 
-a = float(input("Enter the lower bound: "))
-print()
-if a <= 0 or (a - a // 1) != 0:
-    show = True
-    while a <= 0 or (a - a // 1) != 0:
-        a = float(input("Your input must be natural!\n"))
-a = int(a)
-if show:
-    print()
-    show = None
-
-b = float(input("Enter the upper bound: "))
-print()
-while b <= 0 or (b - b // 1) != 0 or a > b:
-    show = True
-    while b <= 0 or (b - b // 1) != 0:
-        b = float(input("Your input must be natural! "))
-    while a > b:
-        b = float(input("Upper bound cannot be smaller than the lower one! "))
+a = input("Enter the lower bound: ")
+for i in a:
+    if i == "." or i == "-":
+        deny = True
         break
+    else:
+        deny = False
+
+while deny:
+    fails += 1
+    a = input("Enter a NATURAL number: ")
+    for i in a:
+        if i == "." or i == "-":
+            deny = True
+            break
+        else:
+            deny = False
+
+if fails > 0:
+    print()
+    fails = 0
+
+a = int(a)
+deny = None
+deny1 = True
+
+b = input("Enter the upper bound: ")
+
+for i in b:
+    if i == "." or i == "-":
+        deny = True
+        break
+    else:
+        deny = False
+if eval(b) < a:
+    deny1 = True
+else:
+    deny1 = False
+
+while deny or deny1:
+    fails += 1
+    while deny:
+        b = input("Enter a NATURAL number: ")
+        for i in b:
+            if i == "." or i == "-":
+                deny = True
+                break
+            else:
+                deny = False
+
+    if eval(b) < a:
+        deny1 = True
+    else:
+        deny1 = False
+
+    while deny1:
+        b = input("Upper bound must be GREATER than the lower one: ")
+        if eval(b) < a:
+            deny1 = True
+            break
+        else:
+            deny1 = False
+
+    for i in b:
+        if i == "." or i == "-":
+            deny = True
+            break
+        else:
+            deny = False
+
+if fails > 0:
+    print()
+    fails = 0
 
 b = int(b)
+del deny, deny1
 if show:
     print()
     del show
