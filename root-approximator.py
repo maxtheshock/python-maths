@@ -35,5 +35,6 @@ if not exact:
     if f1 < 10 ** (-15):
         print()
         print("[!] Result:", x2)
+
     else:
         print("[!] Could not find any root")

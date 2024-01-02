@@ -12,7 +12,7 @@ while i <= a ** 0.5:
     if d == 0:
         factors.append(str(i))
         a //= i
-    # !! x2 SLOW !!
+    # !! x2 SLOWER !!
     # else:
     #     i += 1
     elif i == 2:
